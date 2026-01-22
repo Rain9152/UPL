@@ -7,7 +7,7 @@ export class AppService {
   }
 
   get_addition(): any {
-    return 1+5;
+    return 100+654;
   }
 
 }
