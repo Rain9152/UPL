@@ -1,0 +1,1 @@
+CREATE TABLE upl2(id int);
