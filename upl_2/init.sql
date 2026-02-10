@@ -73,3 +73,4 @@ VALUES
 ('Noir', 13, ' '), ('Noir', 13, ' '), ('Noir', 13, ' '), ('Noir', 13, ' '), -- 4 Changement Couleur
 ('Noir', 14, ' '), ('Noir', 14, ' '), ('Noir', 14, ' '), ('Noir', 14, ' '); -- 4 Joker (+4)
 
+
