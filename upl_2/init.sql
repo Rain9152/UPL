@@ -1,3 +1,4 @@
+-- TABLE JOUEUR
 CREATE TYPE statut_partie AS ENUM ('en_cours', 'terminee');
 CREATE TABLE Joueurs
 (
@@ -6,6 +7,7 @@ CREATE TABLE Joueurs
     Ordre INT
 );
 
+--TABLE PARTIE
 CREATE TABLE Partie
 (
     ID SERIAL PRIMARY KEY NOT NULL,
@@ -14,15 +16,24 @@ CREATE TABLE Partie
     CONSTRAINT fk_gagnant FOREIGN KEY (Gagnant) REFERENCES Joueurs(ID) ON DELETE SET NULL
 );
 
+--TABLE DE LIAISON JOUEUR -> PARTIE
 CREATE TABLE Joueurs_Partie
 (
     ID SERIAL PRIMARY KEY NOT NULL,
     Joueurs_ID INT,
     Partie_ID INT,
     CONSTRAINT fk_joueur FOREIGN KEY (Joueurs_ID) REFERENCES Joueurs(ID) ON DELETE SET NULL,
-    CONSTRAINT fk_partie FOREIGN KEY (Partie_ID) REFERENCES Joueurs(ID) ON DELETE CASCADE
+    CONSTRAINT fk_partie FOREIGN KEY (Partie_ID) REFERENCES Partie(ID) ON DELETE CASCADE
 );
 
+--TABLE DECK
+CREATE TABLE Deck
+(
+    ID SERIAL PRIMARY KEY NOT NULL
+);
+
+
+--TABLE CARTES
 CREATE TABLE Cartes
 (
     ID SERIAL PRIMARY KEY NOT NULL,
@@ -97,4 +108,32 @@ VALUES
 -- CARTES NOIRES / SPECIALES (8 cartes)
 ('Noir', 13, ' '), ('Noir', 13, ' '), ('Noir', 13, ' '), ('Noir', 13, ' '), -- 4 Changement Couleur
 ('Noir', 14, ' '), ('Noir', 14, ' '), ('Noir', 14, ' '), ('Noir', 14, ' '); -- 4 Joker (+4)
+
+--TABLE DE LIAISON DECK -> CARTES
+CREATE TYPE statut_carte AS ENUM ('dans_pioche', 'dans_main','dans_defausse');
+CREATE TABLE Deck_Cartes
+(
+    ID SERIAL PRIMARY KEY NOT NULL,
+    Deck_ID INT,
+    Cartes_ID INT,
+    Statut statut_carte NOT NULL default 'dans_pioche',
+    Joueur_ID INT,
+    Updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
+    CONSTRAINT fk_Deck FOREIGN KEY (Deck_ID) REFERENCES Deck (ID) ON DELETE CASCADE,
+    CONSTRAINT fk_Carte FOREIGN KEY (Cartes_ID) REFERENCES Cartes (ID) ON DELETE CASCADE,
+    CONSTRAINT fk_Joueur FOREIGN KEY (Joueur_ID) REFERENCES Joueurs (ID) ON DELETE CASCADE
+
+);
+
+--TABLE DE LIAISON DECK -> PARTIE
+CREATE TABLE Deck_Partie
+(
+    ID SERIAL PRIMARY KEY NOT NULL,
+    Deck_ID INT,
+    Partie_ID INT,
+    CONSTRAINT fk_Deck FOREIGN KEY (Deck_ID) REFERENCES Deck (ID) ON DELETE CASCADE,
+    CONSTRAINT fk_Partie FOREIGN KEY (Partie_ID) REFERENCES Partie (ID) ON DELETE CASCADE
+
+);
+
 
