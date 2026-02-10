@@ -14,6 +14,9 @@ CREATE TABLE Partie
     CONSTRAINT fk_gagnant FOREIGN KEY (Gagnant) REFERENCES Joueurs(ID) ON DELETE SET NULL
 );
 
+
+
+
 CREATE TABLE Cartes
 (
     ID SERIAL PRIMARY KEY NOT NULL,
@@ -90,3 +93,20 @@ VALUES
 ('Noir', 14, ' '), ('Noir', 14, ' '), ('Noir', 14, ' '), ('Noir', 14, ' '); -- 4 Joker (+4)
 
 
+CREATE TABLE Deck
+(
+    ID SERIAL PRIMARY KEY NOT NULL
+);
+
+CREATE TYPE statut_carte AS ENUM ('dans_pioche', 'dans_main','dans_defausse');
+CREATE TABLE Deck_Cartes
+(
+    ID SERIAL PRIMARY KEY NOT NULL,
+    Deck_ID INT,
+    Cartes_ID INT,
+    Statut statut_carte NOT NULL default 'dans_pioche',
+    Updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
+    CONSTRAINT fk_Deck FOREIGN KEY (Deck_ID) REFERENCES Deck (ID) ON DELETE CASCADE,
+    CONSTRAINT fk_Carte FOREIGN KEY (Cartes_ID) REFERENCES Cartes (ID) ON DELETE CASCADE
+
+);
