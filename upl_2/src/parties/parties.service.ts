@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Parties } from './parties.entity'
 import { DeckService } from 'src/deck/deck.service';
+import { JoueursService } from 'src/joueurs/joueurs.service';
 
 @Injectable()
 export class PartiesService {
@@ -12,7 +13,8 @@ export class PartiesService {
             @InjectRepository(Parties)
             private partieRepository: Repository<Parties>,
 
-            private readonly deckService : DeckService
+            private readonly deckService : DeckService,
+            private readonly joueursService : JoueursService
         ) {}
 
         
@@ -28,12 +30,12 @@ export class PartiesService {
     }
 
 
-    nouvellePartie(): any{
-        
-        this.creePartieBD();
+async nouvellePartie(pseudos: string[]) {        
+        const partie = await this.creePartieBD();
 
-        this.deckService.createDeck();
-        
+        await this.deckService.createDeck(partie);
+        const joueurs = await this.joueursService.createPlayers(pseudos);
+        return joueurs;
         
 
     }

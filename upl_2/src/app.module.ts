@@ -20,6 +20,8 @@ import { PartiesModule } from './parties/parties.module';
       database: 'upl', // Le nom de la base de données
       autoLoadEntities: true, // Pratique : charge automatiquement les tables que l'on va créer
       synchronize: false, // TRÈS IMPORTANT : Laissez sur false !
+      retryAttempts: 10,   // nombre de tentatives
+      retryDelay: 3000, 
     }),
 
     TestRouteModule,

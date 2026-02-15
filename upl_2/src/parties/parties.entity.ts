@@ -8,7 +8,7 @@ export enum status_partie{
 
 
 // Le nom entre parenthèses doit correspondre EXACTEMENT au nom de la table dans Adminer
-@Entity('parties') 
+@Entity('partie') 
 export class Parties {
   
   // PrimaryGeneratedColumn car on utilise un SERIAL qui s'auto-incrémente

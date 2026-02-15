@@ -8,9 +8,6 @@ export class DeckController {
 
     constructor(private readonly DeckService: DeckService) {}
 
-  @Get("createdeck")
-  async createDeck() {
-    return await this.DeckService.createDeck();
-  }
+
 
 }

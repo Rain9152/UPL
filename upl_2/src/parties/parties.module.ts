@@ -4,6 +4,7 @@ import { PartiesController } from './parties.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Parties } from './parties.entity'
 import { DeckModule } from 'src/deck/deck.module';
+import { JoueursModule } from 'src/joueurs/joueurs.module';
 
 
 @Module({
@@ -13,10 +14,11 @@ import { DeckModule } from 'src/deck/deck.module';
       // 2. On déclare les entitées dans le module pour pouvoir s'en servir
       TypeOrmModule.forFeature([Parties]),
       DeckModule,
+      JoueursModule
   
     ],
 
   providers: [PartiesService],
-  controllers: [PartiesController]
+  controllers: [PartiesController],
 })
 export class PartiesModule {}

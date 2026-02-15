@@ -4,6 +4,7 @@ import { JoueursController } from './joueurs.controller';
 
 @Module({
   providers: [JoueursService],
-  controllers: [JoueursController]
+  controllers: [JoueursController],
+  exports:[JoueursService],
 })
 export class JoueursModule {}
