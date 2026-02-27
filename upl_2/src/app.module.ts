@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DeckModule } from './deck/deck.module';
 import { JoueursModule } from './joueurs/joueurs.module';
 import { PartiesModule } from './parties/parties.module';
+import { DeckCartesModule } from './deck_cartes/deck_cartes.module';
 
 
 @Module({
@@ -31,6 +32,8 @@ import { PartiesModule } from './parties/parties.module';
     JoueursModule,
 
     PartiesModule,
+
+    DeckCartesModule,
   ],
 
   controllers: [AppController],
