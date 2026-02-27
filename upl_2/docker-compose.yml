@@ -41,6 +41,7 @@ services:
       DB_PASSWORD: postgres
       DB_NAME: upl
     volumes:
-      - ./src:/app/src
+     - ./src:/app/src
+
 
       
