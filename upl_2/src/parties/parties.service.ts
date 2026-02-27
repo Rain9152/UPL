@@ -34,7 +34,7 @@ async nouvellePartie(pseudos: string[]) {
         const partie = await this.creePartieBD();
 
         await this.deckService.createDeck(partie);
-        const joueurs = await this.joueursService.createPlayers(pseudos);
+        const joueurs = await this.joueursService.createPlayers(pseudos, partie);
         return joueurs;
         
 
